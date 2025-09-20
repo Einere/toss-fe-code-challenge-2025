@@ -1,4 +1,4 @@
-import type { FormInput } from "./types";
+import type { FormInput } from "../types";
 import { createRoot } from "react-dom/client";
 import { AccessibleModal } from "./AccessableModal";
 import { FormModalContent } from "./FormModalContent";

@@ -1,6 +1,6 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import type { FormInput } from "./types";
+import type { FormInput } from "../types";
 
 interface FormModalContentProps {
   titleId: string;

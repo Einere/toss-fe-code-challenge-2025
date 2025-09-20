@@ -1,6 +1,6 @@
-import { openFormModal } from "./ModalManager";
+import { openFormModal } from "../components";
 
-const ModalFormPage = () => {
+export const ModalFormPage = () => {
   /* 여기에 구현해 주세요 */
   async function openFormModalAndGetFormValues(element: HTMLButtonElement) {
     const formValues = await openFormModal(element);
@@ -21,5 +21,3 @@ const ModalFormPage = () => {
     </div>
   );
 };
-
-export default ModalFormPage;
