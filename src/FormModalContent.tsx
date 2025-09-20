@@ -1,13 +1,13 @@
-// FormModalContent.tsx
 import React from "react";
 import { useForm } from "react-hook-form";
-import type { FormInput } from "./types"; // 폼 유효성 검사 라이브러리
+import type { FormInput } from "./types";
 
 interface FormModalContentProps {
+  titleId: string;
   onClose: (data: FormInput | null) => void;
 }
 
-export function FormModalContent({ onClose }: FormModalContentProps) {
+export function FormModalContent({ titleId, onClose }: FormModalContentProps) {
   const {
     register,
     handleSubmit,
@@ -20,9 +20,10 @@ export function FormModalContent({ onClose }: FormModalContentProps) {
 
   return (
     <div className="h-full overflow-y-scroll p-4">
-      <h2 id="modal-title" role="heading" className="mb-4">
+      {/* tabIndex 를 이용해 모달이 열린 후, 제목에 포커스가 가도록 함 */}
+      <h1 id={titleId} role="heading" className="mb-4" tabIndex={-1}>
         폼 작성 모달
-      </h2>
+      </h1>
       <form onSubmit={handleSubmit(onSubmit)}>
         <label htmlFor="input-email" aria-labelledby="input-email">
           이메일
@@ -40,7 +41,7 @@ export function FormModalContent({ onClose }: FormModalContentProps) {
           aria-invalid={errors.email ? "true" : "false"}
         />
         {errors.email && (
-          // 폼 사용성: 스크린리더에게 즉시 전달
+          // alert 역할을 통해 즉각적인 경고
           <p role="alert" className="text-error">
             {errors.email.message}
           </p>

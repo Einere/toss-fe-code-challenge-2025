@@ -12,14 +12,8 @@ export function AccessibleModal({
 }: PropsWithChildren<AccessibleModalProps>) {
   const modalRef = useRef<HTMLDivElement>(null);
 
-  // 1. UI/UX: 배경 스크롤 잠금
-  // useLockBodyScroll();
-
-  // 3. 포커스 흐름: Focus Trap 설정
-  // 모달이 열릴 때 제목으로 포커스 이동 (useFocusTrap 내부에서 처리)
-  // useFocusTrap(modalRef);
-
   useEffect(() => {
+    // 모달 내 제목 요소에 포커스 주기
     if (modalRef.current) {
       const heading =
         modalRef.current.querySelector<HTMLDivElement>("[role='heading']");
@@ -29,6 +23,7 @@ export function AccessibleModal({
         console.log("focus!");
       }
 
+      // 모달 바깥 요소 스크롤 방지
       document.body.classList.add("overflow-hidden");
     }
   }, []);
@@ -36,22 +31,18 @@ export function AccessibleModal({
   return (
     <div
       className="modal-overlay"
-      // 모달 닫기: Overlay 클릭
+      // 오버레이 영역 클릭 시, 모달 닫기
       onClick={(e) => {
         if (e.target === e.currentTarget) {
           console.log("close by clicking overaly!");
           onClose(null);
         }
       }}
-      // 모달 닫기: esc 키 다운
+      // ESC 키 다운 시, 모달 닫기
       onKeyDown={(e) => {
         if (e.key === "Escape") {
           onClose(null);
         }
-      }}
-      onScroll={(e) => {
-        e.preventDefault();
-        e.stopPropagation();
       }}
     >
       <div
@@ -60,7 +51,6 @@ export function AccessibleModal({
         aria-modal="true"
         aria-labelledby={titleId}
         className="modal-container"
-        tabIndex={-1} // 포커스 이동을 위해 설정 (첫 포커스 요소로)
       >
         {children}
       </div>
