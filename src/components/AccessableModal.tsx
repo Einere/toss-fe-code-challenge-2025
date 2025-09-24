@@ -1,11 +1,11 @@
 import React, { useRef, useEffect, type PropsWithChildren } from "react";
 
+// TODO: 모달 내 포커스 트랩 구현하기
 interface AccessibleModalProps {
   titleId: string;
   descriptionId?: string;
   onClose: (data: any | null) => void;
 }
-
 export function AccessibleModal({
   titleId,
   descriptionId,

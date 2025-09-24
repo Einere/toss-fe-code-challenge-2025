@@ -37,6 +37,7 @@ export function FormModalContent({
         <input
           id="input-email"
           type="email"
+          autoComplete="email"
           {...register("email", {
             required: "이메일은 필수입니다.",
             pattern: {
