@@ -9,7 +9,3 @@ createRoot(document.getElementById("root")!).render(
     <ModalFormPage />
   </StrictMode>,
 );
-
-document.body.addEventListener("keydown", (e) => {
-  console.log(e.currentTarget);
-});

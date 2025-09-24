@@ -47,7 +47,6 @@ export function AccessibleModal({
       // 오버레이 영역 클릭 시, 모달 닫기
       onClick={(e) => {
         if (e.target === e.currentTarget) {
-          console.log("close by clicking overaly!");
           onClose(null);
         }
       }}
