@@ -3,6 +3,7 @@ import { createRoot } from "react-dom/client";
 import { AccessibleModal } from "./AccessableModal";
 import { FormModalContent } from "./FormModalContent";
 
+// TODO: 모달 컴포넌트를 인자로 받아서 렌더링하도록 수정
 export const openFormModal = (
   element: HTMLButtonElement,
 ): Promise<FormInput | null> => {
@@ -30,7 +31,11 @@ export const openFormModal = (
     // 폼 모달을 createRoot 를 이용해 렌더링.
     // createPortal 은 JSX 영역에서만 동작하는 듯.
     createRoot(portalRoot).render(
-      <AccessibleModal titleId="modal-title-id" onClose={handleClose}>
+      <AccessibleModal
+        titleId="modal-title-id"
+        descriptionId="modal-desc-id"
+        onClose={handleClose}
+      >
         <FormModalContent
           titleId="modal-title-id"
           descriptionId="modal-desc-id"

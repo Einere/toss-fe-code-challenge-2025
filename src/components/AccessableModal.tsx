@@ -2,11 +2,13 @@ import React, { useRef, useEffect, type PropsWithChildren } from "react";
 
 interface AccessibleModalProps {
   titleId: string;
+  descriptionId?: string;
   onClose: (data: any | null) => void;
 }
 
 export function AccessibleModal({
   titleId,
+  descriptionId,
   onClose,
   children,
 }: PropsWithChildren<AccessibleModalProps>) {
@@ -56,6 +58,7 @@ export function AccessibleModal({
         role="dialog"
         aria-modal="true"
         aria-labelledby={titleId}
+        aria-describedby={descriptionId}
         className="modal-container"
       >
         {children}
