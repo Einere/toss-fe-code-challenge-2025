@@ -1,2 +1,2 @@
-export * from "./ModalManager";
+export * from "./openModal";
 export * from "./openFormModal";

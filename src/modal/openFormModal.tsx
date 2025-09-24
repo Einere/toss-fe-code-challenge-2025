@@ -1,4 +1,4 @@
-import { openModal } from "./ModalManager";
+import { openModal } from "./openModal";
 import { FormModalContent } from "../components";
 
 export const openFormModal = (trigger: HTMLButtonElement) =>
