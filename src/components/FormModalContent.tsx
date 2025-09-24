@@ -4,7 +4,7 @@ import type { FormInput } from "../types";
 
 interface FormModalContentProps {
   titleId: string;
-  descriptionId: string;
+  descriptionId?: string;
   onClose: (data: FormInput | null) => void;
 }
 

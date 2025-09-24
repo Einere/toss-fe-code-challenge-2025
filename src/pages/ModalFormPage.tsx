@@ -1,4 +1,4 @@
-import { openFormModal } from "../components";
+import { openFormModal } from "../modal";
 
 export const ModalFormPage = () => {
   /* 여기에 구현해 주세요 */
