@@ -1,57 +1,51 @@
 import React, { useRef, useEffect, type PropsWithChildren } from "react";
 
+// TODO: 모달 내 포커스 트랩 구현하기
 interface AccessibleModalProps {
   titleId: string;
+  descriptionId?: string;
   onClose: (data: any | null) => void;
 }
-
 export function AccessibleModal({
   titleId,
+  descriptionId,
   onClose,
   children,
 }: PropsWithChildren<AccessibleModalProps>) {
   const modalRef = useRef<HTMLDivElement>(null);
 
-  // 1. UI/UX: 배경 스크롤 잠금
-  // useLockBodyScroll();
-
-  // 3. 포커스 흐름: Focus Trap 설정
-  // 모달이 열릴 때 제목으로 포커스 이동 (useFocusTrap 내부에서 처리)
-  // useFocusTrap(modalRef);
-
+  // 모달 내 제목 요소에 포커스 주기
   useEffect(() => {
     if (modalRef.current) {
-      const heading =
-        modalRef.current.querySelector<HTMLDivElement>("[role='heading']");
+      modalRef.current.focus();
 
-      if (heading) {
-        heading.focus();
-        console.log("focus!");
-      }
-
+      // 모달 바깥 요소 스크롤 방지
       document.body.classList.add("overflow-hidden");
     }
   }, []);
 
+  // ESC 로 모달을 닫을 수 있도록 함
+  useEffect(() => {
+    function closeModalOnEsc(e: KeyboardEvent) {
+      if (e.key === "Escape") {
+        onClose(null);
+      }
+    }
+    document.body.addEventListener("keydown", closeModalOnEsc);
+
+    return () => {
+      document.body.removeEventListener("keydown", closeModalOnEsc);
+    };
+  }, [onClose]);
+
   return (
     <div
       className="modal-overlay"
-      // 모달 닫기: Overlay 클릭
+      // 오버레이 영역 클릭 시, 모달 닫기
       onClick={(e) => {
         if (e.target === e.currentTarget) {
-          console.log("close by clicking overaly!");
           onClose(null);
         }
-      }}
-      // 모달 닫기: esc 키 다운
-      onKeyDown={(e) => {
-        if (e.key === "Escape") {
-          onClose(null);
-        }
-      }}
-      onScroll={(e) => {
-        e.preventDefault();
-        e.stopPropagation();
       }}
     >
       <div
@@ -59,8 +53,10 @@ export function AccessibleModal({
         role="dialog"
         aria-modal="true"
         aria-labelledby={titleId}
+        aria-describedby={descriptionId}
         className="modal-container"
-        tabIndex={-1} // 포커스 이동을 위해 설정 (첫 포커스 요소로)
+        // NOTE: 스크린 리더가 모달에 대한 내용을 읽어주기 위해서는 포커스가 가야 함.
+        tabIndex={-1}
       >
         {children}
       </div>
