@@ -31,7 +31,11 @@ export const openFormModal = (
     // createPortal 은 JSX 영역에서만 동작하는 듯.
     createRoot(portalRoot).render(
       <AccessibleModal titleId="modal-title-id" onClose={handleClose}>
-        <FormModalContent titleId="modal-title-id" onClose={handleClose} />
+        <FormModalContent
+          titleId="modal-title-id"
+          descriptionId="modal-desc-id"
+          onClose={handleClose}
+        />
       </AccessibleModal>,
     );
   });
