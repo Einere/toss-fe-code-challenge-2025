@@ -1,10 +1,8 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import type { FormInput } from "../types";
+import type { BaseModalProps, FormInput } from "../types";
 
-interface FormModalContentProps {
-  titleId: string;
-  descriptionId?: string;
+interface FormModalContentProps extends BaseModalProps {
   onClose: (data: FormInput | null) => void;
 }
 
