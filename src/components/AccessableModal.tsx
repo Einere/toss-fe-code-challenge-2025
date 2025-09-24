@@ -14,15 +14,10 @@ export function AccessibleModal({
 }: PropsWithChildren<AccessibleModalProps>) {
   const modalRef = useRef<HTMLDivElement>(null);
 
+  // 모달 내 제목 요소에 포커스 주기
   useEffect(() => {
-    // 모달 내 제목 요소에 포커스 주기
     if (modalRef.current) {
-      const heading =
-        modalRef.current.querySelector<HTMLDivElement>("[role='heading']");
-
-      if (heading) {
-        heading.focus();
-      }
+      modalRef.current.focus();
 
       // 모달 바깥 요소 스크롤 방지
       document.body.classList.add("overflow-hidden");
@@ -60,6 +55,8 @@ export function AccessibleModal({
         aria-labelledby={titleId}
         aria-describedby={descriptionId}
         className="modal-container"
+        // NOTE: 스크린 리더가 모달에 대한 내용을 읽어주기 위해서는 포커스가 가야 함.
+        tabIndex={-1}
       >
         {children}
       </div>

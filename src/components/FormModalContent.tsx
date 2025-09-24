@@ -26,7 +26,7 @@ export function FormModalContent({
   return (
     <div className="h-full overflow-y-scroll p-4">
       {/* tabIndex 를 이용해 모달이 열린 후, 제목에 포커스가 가도록 함 */}
-      <h1 id={titleId} role="heading" className="mb-4" tabIndex={-1}>
+      <h1 id={titleId} role="heading" className="mb-4">
         폼 작성 모달
       </h1>
       <p id={descriptionId}>아래 내용을 작성해주세요.</p>
