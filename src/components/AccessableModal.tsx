@@ -20,13 +20,26 @@ export function AccessibleModal({
 
       if (heading) {
         heading.focus();
-        console.log("focus!");
       }
 
       // 모달 바깥 요소 스크롤 방지
       document.body.classList.add("overflow-hidden");
     }
   }, []);
+
+  // ESC 로 모달을 닫을 수 있도록 함
+  useEffect(() => {
+    function closeModalOnEsc(e: KeyboardEvent) {
+      if (e.key === "Escape") {
+        onClose(null);
+      }
+    }
+    document.body.addEventListener("keydown", closeModalOnEsc);
+
+    return () => {
+      document.body.removeEventListener("keydown", closeModalOnEsc);
+    };
+  }, [onClose]);
 
   return (
     <div
@@ -35,12 +48,6 @@ export function AccessibleModal({
       onClick={(e) => {
         if (e.target === e.currentTarget) {
           console.log("close by clicking overaly!");
-          onClose(null);
-        }
-      }}
-      // ESC 키 다운 시, 모달 닫기
-      onKeyDown={(e) => {
-        if (e.key === "Escape") {
           onClose(null);
         }
       }}
