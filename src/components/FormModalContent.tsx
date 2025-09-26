@@ -1,6 +1,6 @@
-import React from "react";
 import { useForm } from "react-hook-form";
 import type { BaseModalProps, FormInput } from "../types";
+import { Modal } from "../Modal";
 
 interface FormModalContentProps extends BaseModalProps {
   onClose: (data: FormInput | null) => void;
@@ -23,13 +23,19 @@ export function FormModalContent({
 
   return (
     <div className="h-full overflow-y-scroll p-4">
-      {/* tabIndex 를 이용해 모달이 열린 후, 제목에 포커스가 가도록 함 */}
-      <h1 id={titleId} role="heading" className="mb-4">
-        폼 작성 모달
-      </h1>
-      <p id={descriptionId}>아래 내용을 작성해주세요.</p>
+      {/* 폼 타이틀 영역 */}
+      <Modal.Title id={titleId}>폼 작성 모달</Modal.Title>
+
+      {/* 폼 바디 영역 */}
+      <p id={descriptionId} className="mb-4">
+        아래 내용을 작성해주세요.
+      </p>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <label htmlFor="input-email" aria-labelledby="input-email">
+        <label
+          htmlFor="input-email"
+          aria-labelledby="input-email"
+          className="mr-4"
+        >
           이메일
         </label>
         <input
@@ -52,22 +58,18 @@ export function FormModalContent({
             {errors.email.message}
           </p>
         )}
-        <div className="h-[1200px]"></div>
-        <button
-          type="button"
-          onClick={() => onClose(null)}
-          className="inline-block"
-          aria-description="신청 폼 모달을 닫습니다."
-        >
-          취소
-        </button>
-        <button
-          type="submit"
-          className="button-primary inline-block"
-          aria-description="이 폼을 제출합니다."
-        >
-          제출하기
-        </button>
+
+        <div className="mt-4 flex gap-4">
+          <Modal.CancelButton
+            description="신청 폼 모달을 닫습니다."
+            onClick={() => onClose(null)}
+          >
+            취소
+          </Modal.CancelButton>
+          <Modal.ConfirmButton type="submit" description="이 폼을 제출합니다.">
+            제출하기
+          </Modal.ConfirmButton>
+        </div>
       </form>
     </div>
   );

@@ -1,4 +1,12 @@
-import { openFormModal } from "../modal";
+import { openModal } from "../Modal";
+import { FormModalContent } from "../components";
+
+const openFormModal = (trigger: HTMLButtonElement) =>
+  openModal(
+    { titleId: "form-modal-title", descriptionId: "form-modal-desc" },
+    FormModalContent,
+    trigger,
+  );
 
 export const ModalFormPage = () => {
   /* 여기에 구현해 주세요 */
