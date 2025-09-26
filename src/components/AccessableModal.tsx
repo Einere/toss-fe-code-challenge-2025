@@ -11,7 +11,8 @@ export function AccessibleModal({
 }: PropsWithChildren<AccessibleModalProps>) {
   const modalRef = useRef<HTMLDivElement>(null);
 
-  // 모달 내 제목 요소에 포커스 주기
+  // 모달 자체에 포커스.
+  // 보이스오버가 모달 내 타이틀에 포커스를 주는 것에 비해, 더 많은 맥락을 제공함.
   useEffect(() => {
     if (modalRef.current) {
       modalRef.current.focus();
@@ -28,10 +29,10 @@ export function AccessibleModal({
         onClose(null);
       }
     }
-    document.body.addEventListener("keydown", closeModalOnEsc);
+    document.body.addEventListener("keyup", closeModalOnEsc);
 
     return () => {
-      document.body.removeEventListener("keydown", closeModalOnEsc);
+      document.body.removeEventListener("keyup", closeModalOnEsc);
     };
   }, [onClose]);
 
