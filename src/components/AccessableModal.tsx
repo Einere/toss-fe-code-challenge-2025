@@ -39,6 +39,8 @@ export function AccessibleModal({
   return (
     <div
       className="modal-overlay"
+      // 접근성 도구가 해당 요소를 무시하도록 함
+      role="presentation"
       // 오버레이 영역 클릭 시, 모달 닫기
       onClick={(e) => {
         if (e.target === e.currentTarget) {
